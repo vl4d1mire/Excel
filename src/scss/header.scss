@@ -33,6 +33,7 @@
   }
 
   .button {
-    @include button(red)
+    @include button(red);
   }
+
 }
