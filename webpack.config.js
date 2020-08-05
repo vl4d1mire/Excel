@@ -9,23 +9,22 @@ const isDev = !isProd
 
 const filename = ext => !isProd ? `[bundle].${ext}` : `[bundle].[hash].${ext}`
 
-const isLoader = () => {
-  const loader = [
+const jsLoader = () => {
+  const loaders = [
     {
       loader: 'babel-loader',
       options: {
-        'presets': [
-          '@babel/preset-env'
-        ]
+        presets: ['@babel/preset-env'],
+        plugins: ['@babel/plugin-proposal-class-properties']
       }
     }
   ]
 
   if (isDev) {
-    loader.push('babel-loader')
+    loaders.push('eslint-loader')
   }
 
-  return loader
+  return loaders
 }
 
 module.exports = {
@@ -56,14 +55,12 @@ module.exports = {
         collapseWhitespace: isProd
       }
     }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'src/favicon.ico'),
-          to: path.resolve(__dirname, 'dist')
-        }
-      ]
-    }),
+    new CopyPlugin([
+      {
+        from: path.resolve(__dirname, 'src/favicon.ico'),
+        to: path.resolve(__dirname, 'dist')
+      }
+    ]),
     new MiniCssExtractPlugin({
       filename: filename('css')
     })
@@ -92,7 +89,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: isLoader()
+        loader: jsLoader(),
       },
     ],
   },
