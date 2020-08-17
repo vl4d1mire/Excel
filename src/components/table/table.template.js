@@ -1,7 +1,15 @@
-function toCell(cell, col) {
-  return `
-       <div class="cell" contenteditable="" data-col="${col}"></div>
+function toCell(row) {
+  return function(_, col) {
+    return `
+        <div 
+          class="cell" 
+          contenteditable="" 
+          data-col="${col}"
+          data-type="cell"
+          data-id="${row}:${col}"
+        ></div>
     `
+  }
 }
 
 function toColumn(col, index) {
@@ -48,13 +56,13 @@ export function createTable(rawCount = 20) {
 
   raw.push(createRaw(null, cols))
 
-  for (let i = 0; i < rawCount; i++) {
+  for (let row = 0; row < rawCount; row++) {
     const cells = new Array(colsCount)
         .fill('')
-        .map(toCell)
+        .map(toCell(row))
         .join('')
 
-    raw.push(createRaw(i + 1, cells))
+    raw.push(createRaw(row + 1, cells))
   }
 
   return raw.join('')
