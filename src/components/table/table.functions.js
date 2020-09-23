@@ -20,7 +20,7 @@ export function matrix($target, $current) {
   }, [])
 }
 
-export function nextSelection(key, {col, row}) {
+export function nextSelector(key, {col, row}) {
   const MIN_VALUE = 0
   switch (key) {
     case 'Enter':
@@ -32,11 +32,12 @@ export function nextSelection(key, {col, row}) {
       col++
       break
     case 'ArrowLeft':
-      col = col - 1 < MIN_VALUE ? MIN_VALUE : col -1
+      col = col - 1 < MIN_VALUE ? MIN_VALUE : col - 1
       break
     case 'ArrowUp':
-      row = row - 1 < MIN_VALUE ? MIN_VALUE : row -1
+      row = row - 1 < MIN_VALUE ? MIN_VALUE : row - 1
       break
   }
+
   return `[data-id="${row}:${col}"]`
 }
