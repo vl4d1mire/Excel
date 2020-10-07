@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
-    "build": "cross-env NODE_ENV=production webpack --mode production"
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "lint": "npx eslint ./src"
   },
-  "browserslist": "> 0.25%, not dead",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vl4d1mire/excel-course.git"
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/vl4d1mire/excel-course#readme",
   "private": true,
+  "browserslist": "> 0.25%, not dead",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.0",
