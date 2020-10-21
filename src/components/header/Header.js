@@ -39,21 +39,22 @@ export class Header extends ExcelComponent {
     `
   }
 
-  onInput(event) {
-    const $target = $(event.target)
-    this.$dispatch(changeTitle($target.text()))
-  }
-
   onClick(event) {
     const $target = $(event.target)
+
     if ($target.data.button === 'exit') {
       ActiveRoute.navigate('')
     } else if ($target.data.button === 'remove') {
-      const decision = window.confirm('Вы точно хотите удалить эту таблицу?')
+      const decision = confirm('Вы точно хотите удалить эту таблицу?')
       if (decision) {
-        localStorage.removeItem('excel' + ActiveRoute.param)
+        localStorage.removeItem('excel:' + ActiveRoute.param)
         ActiveRoute.navigate('')
       }
     }
+  }
+
+  onInput(event) {
+    const $target = $(event.target)
+    this.$dispatch(changeTitle($target.text()))
   }
 }
